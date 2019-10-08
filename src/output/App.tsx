@@ -1,7 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Page from "./containers/Page";
+import '../App.css';
+import Page from "../containers/Page";
+import React from "react";
 
 
 const App: React.FC = () => {
@@ -10,6 +9,6 @@ const App: React.FC = () => {
       <Page />
     </div>
   );
-}
+};
 
 export default App;
