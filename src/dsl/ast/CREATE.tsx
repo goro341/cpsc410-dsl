@@ -2,6 +2,9 @@ import ASTNode from "./ASTNode";
 import * as React from "react";
 import STATEMENT from "./STATEMENT";
 import Tokenizer from "../libs/Tokenizer";
+import ObjectNode from "./obj/ObjectNode";
+import ObjectTypeNotExistsError from "../exception/ObjectTypeNotExistsError";
+import ObjectsTable from "../libs/ObjectsTable";
 
 /**
  * Represents
@@ -27,6 +30,9 @@ export default class CREATE extends STATEMENT{
     }
 
     public evaluateNode(): void{
-        return;
+        const obj: ObjectNode|null = ObjectNode.getObjNode(this.type);
+        if(obj === null) throw new ObjectTypeNotExistsError();
+        ObjectsTable.putObject(this.name, obj);
     }
+
 }

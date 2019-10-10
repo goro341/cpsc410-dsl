@@ -8,7 +8,7 @@ import ObjectNode from "./ObjectNode";
  */
 export default class PAGE extends ObjectNode{
 
-    public evaluateNode(): JSX.Element|void {
+    public evaluateNode(): JSX.Element {
         return (<p>hey</p>);
     }
 
