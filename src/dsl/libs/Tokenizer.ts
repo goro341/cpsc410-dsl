@@ -8,11 +8,11 @@ export default class Tokenizer{
         return "";
     }
 
-    public static checkNext(): string{
+    public static checkNext(str: RegExp): string{
         return "";
     }
 
-    public static getAndCheckNext(): string{
+    public static getAndCheckNext(str: RegExp): string{
         return "";
     }
 

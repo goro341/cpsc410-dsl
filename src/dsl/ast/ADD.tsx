@@ -1,6 +1,7 @@
 import ASTNode from "./ASTNode";
 import * as React from "react";
 import STATEMENT from "./STATEMENT";
+import Tokenizer from "../libs/Tokenizer";
 
 /**
  * Represents
@@ -11,6 +12,7 @@ import STATEMENT from "./STATEMENT";
 export default class ADD extends STATEMENT{
 
     public parseNode(): void {
+        Tokenizer.getAndCheckNext(/ADD/g);
     }
 
     public evaluateNode(): void {

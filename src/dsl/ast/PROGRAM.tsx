@@ -3,6 +3,8 @@ import * as React from "react";
 import STATEMENT from "./STATEMENT";
 import ObjectsTable from "../libs/ObjectsTable";
 import PAGE from "./obj/PAGE";
+import Tokenizer from "../libs/Tokenizer";
+import ParsingException from "../exception/ParsingException";
 
 /**
  * Represents
@@ -10,20 +12,25 @@ import PAGE from "./obj/PAGE";
  * this should always be root in AST
  **/
 export default class PROGRAM extends ASTNode{
-    private statments: STATEMENT[];
+    private statements: STATEMENT[];
 
 
     constructor() {
         super();
-        this.statments = [];
+        this.statements = [];
     }
 
     public parseNode(): void {
-
+        while(Tokenizer.hasMore()){
+            const s: STATEMENT|null = STATEMENT.getNextStatment();
+            if(s === null) throw new ParsingException();
+            s.parseNode();
+            this.statements.push(s)
+        }
     }
 
     public evaluateNode(): JSX.Element {
-        this.statments.forEach(s => s.evaluateNode());
+        this.statements.forEach(s => s.evaluateNode()); // runs first stage eval which generates tree
 
         let arr = [];
         let it = ObjectsTable.getAllObjects();
