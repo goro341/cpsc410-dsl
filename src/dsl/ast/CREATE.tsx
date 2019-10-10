@@ -13,7 +13,7 @@ export default class CREATE extends STATEMENT{
     public parseNode(): void {
     }
 
-    public evaluateNode(): JSX.Element|void {
-        return (<p>hey</p>);
+    public evaluateNode(): void{
+        return;
     }
 }

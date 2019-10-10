@@ -12,4 +12,6 @@ export default abstract class ObjectNode extends ASTNode{
      * @param child
      */
     public abstract addChild(child: ObjectNode|string): void;
+
+    public abstract evaluateNode(): JSX.Element;
 }
