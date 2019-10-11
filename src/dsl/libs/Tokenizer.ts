@@ -65,7 +65,7 @@ export default class Tokenizer {
     }
 
     public getAndCheckNext(stringRegex: string): string {
-        const regex = RegExp(stringRegex);
+        const regex = RegExp(stringRegex, 'g');
         const s = this.getNext();
         if (!regex.test(s)) {
             // console.log("FAILED!!! on " + stringRegex);

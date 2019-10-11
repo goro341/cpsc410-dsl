@@ -12,22 +12,25 @@ import ObjectNode from "./obj/ObjectNode";
  * Will lookup x x2 x3 in the symbols table and add them to y
  */
 export default class ADD extends STATEMENT {
-    private child: string;
+    private children: string[];
     private parent: string;
 
     constructor() {
         super();
-        this.child = "";
+        this.children = [];
         this.parent = "";
     }
 
     public parseNode(): void {
         const tokenizer = ASTNode.getTokenizer();
         tokenizer.getAndCheckNext('ADD');
-        this.child = tokenizer.getNext();
-        let to = tokenizer.getNext();
-        if (to === "!to") { //FIXME not sure what this does?
-            throw new ParsingException();
+        let next;
+        while((next = tokenizer.getNext()) !== "to"){
+            if(next === "ADD" || next === "CREATE"){ // grace failure
+                throw new ParsingException();
+            }
+            this.children.push(next);
+            if(tokenizer.checkToken("\,")) tokenizer.getNext();
         }
         this.parent = tokenizer.getNext();
     }
@@ -37,18 +40,22 @@ export default class ADD extends STATEMENT {
         if (!parentObject) {
             throw new ObjectNotExistsError();
         }
-        //TODO support multi adding!
         // TODO: do more type checking here
-        if (this.child.includes("'") || this.child.includes("\"")) {
-            this.child = this.child.replace(/\'/g, "").replace(/"/g, "");
-            parentObject.addChild(this.child);
-        } else {
-            const childObj: ObjectNode|undefined = ObjectsTable.getObject(this.child);
-            if (!childObj) {
-                throw new ObjectNotExistsError();
+        this.children.forEach((child: string) => {
+            console.log(child);
+            let childObj: string|ObjectNode;
+            if (child.includes("'") || child.includes("\"")) {
+                childObj = child.replace(/\'/g, "").replace(/"/g, "");
+            } else {
+                let c: ObjectNode|undefined = ObjectsTable.getObject(child);
+                if (!c) {
+                    throw new ObjectNotExistsError();
+                }
+                childObj = c;
             }
             parentObject.addChild(childObj);
-        }
+        });
+
         return;
     }
 }

@@ -17,7 +17,7 @@ export default class POSITION extends STATEMENT {
         tokenizer.getAndCheckNext('POSITION');
         this.element = tokenizer.getNext();
         let to = tokenizer.getNext();
-        if (to === "!to") {
+        if (to !== "to") {
             throw new ParsingException();
         }
         this.place = tokenizer.getNext();
