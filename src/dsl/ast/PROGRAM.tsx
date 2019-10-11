@@ -53,6 +53,7 @@ export default class PROGRAM extends ASTNode {
     public parseNode(): void {
         while(ASTNode.getTokenizer().hasMore()){
             const s: STATEMENT|null = this.getNextStatement();
+            console.log(s);
             if(s === null) throw new ParsingException();
             s.parseNode();
             this.statements.push(s);

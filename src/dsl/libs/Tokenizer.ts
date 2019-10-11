@@ -30,7 +30,13 @@ export default class Tokenizer {
         for (let s of this.literals) {
             tokenizedProgram = replaceAll(tokenizedProgram, s, "_" + s + "_");
         }
-        tokenizedProgram = tokenizedProgram.replace(/[ ]+/g, "");
+        tokenizedProgram = tokenizedProgram.replace(/([^"]+)|("[^"]+")/g, function($0, $1, $2) {
+            if ($1) {
+                return $1.replace(/\s/g, '');
+            } else {
+                return $2;
+            }
+        });
         tokenizedProgram = replaceAll(tokenizedProgram, "__","_");
         const tempArray = tokenizedProgram.split("_");
         this.tokens = tempArray.slice(1, -1);

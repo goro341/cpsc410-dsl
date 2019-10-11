@@ -39,14 +39,7 @@ export class Header extends React.Component<IHeaderComponentProps, IHeaderCompon
     public render(): JSX.Element {
         return (
             <header className="App-header">
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
                     {this.state.text}
-                </a>
             </header>
         );
     }
