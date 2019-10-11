@@ -1,0 +1,18 @@
+.App-table {
+    border: 1px solid black;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+.App-table td{
+    border-right: 1px solid black;
+}
+
+.App-table td:first-child {
+    border-left: none;
+}
+
+.App-table td:last-child {
+    border-right: none;
+}

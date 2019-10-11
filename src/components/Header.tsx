@@ -33,15 +33,13 @@ export class Header extends React.Component<IHeaderComponentProps, IHeaderCompon
     componentDidMount(): void {
         const temp_text = this.props.name;
         this.setState({text: temp_text});
+        console.log(this.state);
 
     }
 
     public render(): JSX.Element {
         return (
             <header className="App-header">
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
                 <a
                     className="App-link"
                     href="https://reactjs.org"
