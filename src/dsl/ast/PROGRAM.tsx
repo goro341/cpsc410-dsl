@@ -12,8 +12,10 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
 } from "react-router-dom";
+import NoMatch from "../../components/NoMatch";
 
 /**
  * Represents
@@ -74,7 +76,11 @@ export default class PROGRAM extends ASTNode {
         // but for now I guess just compose all pages
         return (<Router>
             <Switch>
+                <Redirect exact from="/" to="/index" />
                 {arr}
+                <Route path="*">
+                    <NoMatch />
+                </Route>
             </Switch>
         </Router>);
     }
