@@ -16,13 +16,12 @@ export default abstract class ObjectNode extends ASTNode{
 
     public abstract evaluateNode(): JSX.Element;
 
-    public static getObjNode(name: string): ObjectNode|null{
+    public static getObjNode(name: string): ObjectNode|null {
         switch (name) {
             case 'PAGE':
                 return new PAGE();
             default:
                 return null;
         }
-
     }
 }

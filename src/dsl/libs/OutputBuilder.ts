@@ -1,6 +1,6 @@
 // @ts-ignore
 import reactElementToJSXString from 'react-element-to-jsx-string';
-export default class OutputBuilder{
+export default class OutputBuilder {
     public static build(element: JSX.Element): string {
         const page = reactElementToJSXString(element);
         /*

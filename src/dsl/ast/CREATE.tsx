@@ -12,7 +12,7 @@ import ObjectsTable from "../libs/ObjectsTable";
  *
  * Will register t in the symbols table with the content being the comp/page that has been defined
  */
-export default class CREATE extends STATEMENT{
+export default class CREATE extends STATEMENT {
     private type: string;
     private name: string;
 
@@ -24,15 +24,14 @@ export default class CREATE extends STATEMENT{
     }
 
     public parseNode(): void {
-        Tokenizer.getAndCheckNext(/CREATE/g);
-        this.type = Tokenizer.getNext();
-        this.name = Tokenizer.getNext();
+        CREATE.tokenizer.getAndCheckNext('/CREATE/g');
+        this.type = CREATE.tokenizer.getNext();
+        this.name = CREATE.tokenizer.getNext();
     }
 
-    public evaluateNode(): void{
-        const obj: ObjectNode|null = ObjectNode.getObjNode(this.type);
-        if(obj === null) throw new ObjectTypeNotExistsError();
+    public evaluateNode(): void {
+        const obj: ObjectNode | null = ObjectNode.getObjNode(this.type);
+        if (obj === null) throw new ObjectTypeNotExistsError();
         ObjectsTable.putObject(this.name, obj);
     }
-
 }

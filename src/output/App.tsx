@@ -5,9 +5,9 @@ import React from "react";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Page />
-    </div>
+        <div className="App">
+            <Page />
+        </div>
   );
 };
 

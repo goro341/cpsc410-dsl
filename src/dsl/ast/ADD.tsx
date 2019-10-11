@@ -9,10 +9,10 @@ import Tokenizer from "../libs/Tokenizer";
  *
  * Will lookup x x2 x3 in the symbols table and add them to y
  */
-export default class ADD extends STATEMENT{
+export default class ADD extends STATEMENT {
 
     public parseNode(): void {
-        Tokenizer.getAndCheckNext(/ADD/g);
+        ADD.tokenizer.getAndCheckNext('/ADD/g');
     }
 
     public evaluateNode(): void {

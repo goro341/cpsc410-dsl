@@ -11,9 +11,8 @@ import ParsingException from "../exception/ParsingException";
  * entire program
  * this should always be root in AST
  **/
-export default class PROGRAM extends ASTNode{
+export default class PROGRAM extends ASTNode {
     private statements: STATEMENT[];
-
 
     constructor() {
         super();
@@ -21,11 +20,11 @@ export default class PROGRAM extends ASTNode{
     }
 
     public parseNode(): void {
-        while(Tokenizer.hasMore()){
+        while(PROGRAM.tokenizer.hasMore()){
             const s: STATEMENT|null = STATEMENT.getNextStatment();
             if(s === null) throw new ParsingException();
             s.parseNode();
-            this.statements.push(s)
+            this.statements.push(s);
         }
     }
 
@@ -36,7 +35,6 @@ export default class PROGRAM extends ASTNode{
         let it = ObjectsTable.getAllObjects();
         let result = it.next();
         while (!result.done) {
-
             result = it.next();
             if(result.value[1] instanceof PAGE){
                 arr.push(result.value[1].evaluateNode()); // needs some routing logic around it
