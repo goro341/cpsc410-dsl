@@ -29,14 +29,12 @@ export default class Tokenizer {
 
         for (let s of this.literals) {
             tokenizedProgram = replaceAll(tokenizedProgram, s, "_" + s + "_");
-            console.log(tokenizedProgram);
         }
         tokenizedProgram = tokenizedProgram.replace(/[ ]+/g, "");
         tokenizedProgram = replaceAll(tokenizedProgram, "__","_");
-        console.log(tokenizedProgram);
         const tempArray = tokenizedProgram.split("_");
         this.tokens = tempArray.slice(1, -1);
-        console.log(this.tokens);
+        // console.log(this.tokens);
     }
 
     public getNext(): string {
@@ -46,6 +44,7 @@ export default class Tokenizer {
             this.currentToken++;
         } else
             token = "NULLTOKEN";
+        // console.log('get ', token);
         return token;
     }
 
@@ -61,7 +60,7 @@ export default class Tokenizer {
     public checkToken(stringRegex: string): boolean {
         const regex = RegExp(stringRegex);
         const s = this.checkNext();
-        console.log("comparing: |" + s + "|  to  |" + regex + "|");
+        // console.log("comparing: |" + s + "|  to  |" + regex + "|");
         return regex.test(s);
     }
 
@@ -69,10 +68,10 @@ export default class Tokenizer {
         const regex = RegExp(stringRegex);
         const s = this.getNext();
         if (!regex.test(s)) {
-            console.log("FAILED!!! on " + stringRegex);
+            // console.log("FAILED!!! on " + stringRegex);
             // EXIT
         }
-        console.log("matched: " + s + "  to  " + stringRegex);
+        // console.log("matched: " + s + "  to  " + stringRegex);
         return s;
     }
 

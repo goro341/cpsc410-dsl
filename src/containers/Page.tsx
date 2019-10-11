@@ -5,5 +5,5 @@ const Page: React.FC = () => {
     return (
         <Header name='nader'/>
     );
-}
+};
 export default (Page)

@@ -1,8 +1,12 @@
 // I think tokenizer will be all static for ease of use
 import ObjectNode from "../ast/obj/ObjectNode";
+import CREATE from "../ast/CREATE";
 
 export default class ObjectsTable {
     private static data: Map<string, ObjectNode> = new Map<string, ObjectNode>();
+    public static creates: Map<string, CREATE> = new Map<string, CREATE>();
+
+
 
     public static putObject(name: string, object: ObjectNode) {
         this.data.set(name, object);
