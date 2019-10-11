@@ -5,6 +5,9 @@
 import ObjectNode from "./ObjectNode";
 import React from "react";
 import TypeMismatchError from "../../exception/TypeMismatchError";
+import {
+    Route
+} from "react-router-dom";
 
 export default class PAGE extends ObjectNode{
     private children: ObjectNode[];
@@ -15,7 +18,7 @@ export default class PAGE extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<div key={this.name}>{this.children.map(c => c.evaluateNode())}</div>);
+        return (<Route key={this.name} path={"/" + this.name}>{this.children.map(c => c.evaluateNode())}</Route>);
     }
 
     public addChild(child: ObjectNode|string): void {

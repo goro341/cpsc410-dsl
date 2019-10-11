@@ -8,6 +8,12 @@ import POSITION from "./POSITION";
 import BUILD from "./BUILD";
 import ObjectsTable from "../libs/ObjectsTable";
 import PAGE from "./obj/PAGE";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 /**
  * Represents
@@ -66,6 +72,10 @@ export default class PROGRAM extends ASTNode {
         // this method is tricky because the PROGRAM should basically eval all sub components
         // then return the composition of all PAGE items in the symbols table, with some React code to seperate pages
         // but for now I guess just compose all pages
-        return (<div>{arr}</div>);
+        return (<Router>
+            <Switch>
+                {arr}
+            </Switch>
+        </Router>);
     }
 }
