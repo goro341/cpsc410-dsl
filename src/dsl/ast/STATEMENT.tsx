@@ -11,7 +11,7 @@ export default abstract class STATEMENT extends ASTNode{
      * Returns either ADD or CREATE depending on next token
      */
     public static getNextStatment(): STATEMENT|null{
-        switch (Tokenizer.getNext()) {
+        switch (STATEMENT.tokenizer.getNext()) {
             case "CREATE":
                 return new CREATE();
             case "ADD":
