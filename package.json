@@ -15,7 +15,6 @@
     "typescript": "3.6.3"
   },
   "scripts": {
-    "start": "tsc && node -r esm src/dsl/WebsiteLang.js",
     "react_start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

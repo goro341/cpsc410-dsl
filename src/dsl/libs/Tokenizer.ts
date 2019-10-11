@@ -1,6 +1,7 @@
 // I think tokenizer will be all static for ease of use
 
 import user_input from '../user-input.txt';
+import {replaceAll} from "./Utils";
 
 export default class Tokenizer {
 
@@ -15,8 +16,6 @@ export default class Tokenizer {
         this.currentToken = 0;
         try {
             Tokenizer.program = program;
-            console.log('program is');
-            console.log(Tokenizer.program);
         } catch (e) {
             console.log("didn't find file");
             // EXIT
@@ -26,18 +25,16 @@ export default class Tokenizer {
 
     private tokenize() {
         let tokenizedProgram = Tokenizer.program
-            .replace("\n", "")
-            .replace("([0-9]+)", "_$1_");
+            .replace(/\n/g, "");
 
         for (let s of this.literals) {
-//            tokenizedProgram = tokenizedProgram.replaceAll(s,"_"+s+"_");
-            tokenizedProgram = tokenizedProgram.replace(s, "_" + s + "_");
+            tokenizedProgram = replaceAll(tokenizedProgram, s, "_" + s + "_");
             console.log(tokenizedProgram);
         }
-//        tokenizedProgram = tokenizedProgram.replaceAll("__","_");
-        tokenizedProgram = tokenizedProgram.replace("[ ]+", "");
+        tokenizedProgram = tokenizedProgram.replace(/[ ]+/g, "");
+        tokenizedProgram = replaceAll(tokenizedProgram, "__","_");
         console.log(tokenizedProgram);
-        const tempArray = tokenizedProgram.split("[_]+");
+        const tempArray = tokenizedProgram.split("_");
         this.tokens = tempArray.slice(1);
         console.log(this.tokens);
     }

@@ -7,7 +7,8 @@ import Tokenizer from "./dsl/libs/Tokenizer";
 (async () => {
     console.log("this is the main function");
 
-    const literals = ["CREATE", "ADD", "PAGE", "COMPONENT", "PHOTO", "TABLE", "ROW", "to"];
+    const literals = ["CREATE", "ADD", "PAGE", "COMPONENT", "PHOTO", "TABLE", "ROW",
+        "to", "POSITION", "CENTER", "BUILD"];
 
     await Tokenizer.makeTokenizer(literals);
     const program = new PROGRAM();
