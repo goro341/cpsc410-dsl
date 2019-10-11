@@ -1,7 +1,15 @@
 import ASTNode from "../ASTNode";
 
 export default abstract class ObjectNode extends ASTNode{
-    // object nodes never need parsing
+    protected name: string;
+
+
+    constructor(name: string) {
+        super();
+        this.name = name;
+    }
+
+// object nodes never need parsing
     // because the parsing is done in CREATE or ADD (or SET)
     public parseNode(): void {
     }
@@ -13,14 +21,4 @@ export default abstract class ObjectNode extends ASTNode{
     public abstract addChild(child: ObjectNode|string): void;
 
     public abstract evaluateNode(): JSX.Element;
-
-    public static getObjNode(name: string): ObjectNode|null {
-        return null;
-        // switch (name) {
-        //     case 'PAGE':
-        //         return new PAGE();
-        //     default:
-        //         return null;
-        // }
-    }
 }

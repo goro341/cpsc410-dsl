@@ -6,6 +6,8 @@ import CREATE from "./CREATE";
 import ADD from "./ADD";
 import POSITION from "./POSITION";
 import BUILD from "./BUILD";
+import ObjectsTable from "../libs/ObjectsTable";
+import PAGE from "./obj/PAGE";
 
 /**
  * Represents
@@ -51,17 +53,16 @@ export default class PROGRAM extends ASTNode {
 
     public evaluateNode(): JSX.Element {
         this.statements.forEach(s => s.evaluateNode()); // runs first stage eval which generates tree
-        // let it = ObjectsTable.getAllObjects();
-        // let result = it.next();
-        // while (!result.done) {
-        //     result = it.next();
-        //     if(result.value[1] instanceof PAGE){
-        //         arr.push(result.value[1].evaluateNode()); // needs some routing logic around it
-        //     }
-        // }
-        let arr = this.statements
-            .map(s => s.evaluateNode())
-            .filter(s => s !== undefined);
+
+        let it = ObjectsTable.getAllObjects();
+        let result = it.next();
+        let arr = [];
+        while (!result.done) {
+            if(result.value[1] instanceof PAGE){
+                arr.push(result.value[1].evaluateNode()); // needs some routing logic around it
+            }
+            result = it.next();
+        }
         // this method is tricky because the PROGRAM should basically eval all sub components
         // then return the composition of all PAGE items in the symbols table, with some React code to seperate pages
         // but for now I guess just compose all pages

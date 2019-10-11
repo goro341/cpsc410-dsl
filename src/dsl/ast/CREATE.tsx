@@ -5,6 +5,8 @@ import ObjectTypeNotExistsError from "../exception/ObjectTypeNotExistsError";
 import ObjectsTable from "../libs/ObjectsTable";
 import ASTNode from "./ASTNode";
 import Header from "../../components/Header";
+import ObjNodeFactory from "./obj/ObjNodeFactory";
+import VariableNameAlreadyExists from "../exception/VariableNameAlreadyExists";
 
 /**
  * Represents
@@ -15,7 +17,6 @@ import Header from "../../components/Header";
 export default class CREATE extends STATEMENT {
     private type: string;
     private name: string;
-    public attributes: any; // TODO: use a better design
 
     constructor() {
         super();
@@ -30,14 +31,10 @@ export default class CREATE extends STATEMENT {
         this.name = tokenizer.getNext();
     }
 
-    public evaluateNode(): JSX.Element {
-        ObjectsTable.creates.set(this.name, this);
-        if (this.type === 'HEADER') {
-            return <Header name={this.attributes}/>
-        }
-        return <div></div>
-        // const obj: ObjectNode | null = ObjectNode.getObjNode(this.type);
-        // if (obj === null) throw new ObjectTypeNotExistsError();
-        // ObjectsTable.putObject(this.name, obj);
+    public evaluateNode(): void {
+        const node: ObjectNode|null = ObjNodeFactory.getObjNode(this.type, this.name);
+        if(node === null) throw new ObjectTypeNotExistsError();
+        if(ObjectsTable.hasObject(this.name)) throw new VariableNameAlreadyExists();
+        ObjectsTable.putObject(this.name, node);
     }
 }
