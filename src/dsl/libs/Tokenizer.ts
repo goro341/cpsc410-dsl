@@ -1,19 +1,22 @@
 // I think tokenizer will be all static for ease of use
 
-import * as fs from 'fs';
+import user_input from '../user-input.txt';
 
 export default class Tokenizer {
 
     private static program: string;
     private tokens: string[] = [];
+
     private currentToken: number;
     private static theTokenizer: Tokenizer;
 
 
-    private constructor(filename: string, private literals: string[]) {
+    private constructor(program: string, private literals: string[]) {
         this.currentToken = 0;
         try {
-            Tokenizer.program = fs.readFileSync(filename, "utf8");
+            Tokenizer.program = program;
+            console.log('program is');
+            console.log(Tokenizer.program);
         } catch (e) {
             console.log("didn't find file");
             // EXIT
@@ -80,9 +83,10 @@ export default class Tokenizer {
         return this.currentToken < this.tokens.length;
     }
 
-    public static makeTokenizer(filename: string, literals: string[]) {
-        if (this.theTokenizer === null) {
-            this.theTokenizer = new Tokenizer(filename, literals);
+    public static async makeTokenizer(literals: string[]) {
+        const program = await (await fetch(user_input)).text();
+        if (!this.theTokenizer) {
+            this.theTokenizer = new Tokenizer(program, literals);
         }
     }
 

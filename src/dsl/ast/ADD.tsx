@@ -1,6 +1,6 @@
-import * as React from "react";
 import STATEMENT from "./STATEMENT";
 import ParsingException from "../exception/ParsingException";
+import ASTNode from "./ASTNode";
 
 /**
  * Represents
@@ -18,13 +18,14 @@ export default class ADD extends STATEMENT{
         this.parent = "";
     }
     public parseNode(): void {
-        ADD.tokenizer.getAndCheckNext('/ADD/g');
-        this.child = ADD.tokenizer.getNext();
-        let to:any = ADD.tokenizer.getNext();
+        const tokenizer = ASTNode.getTokenizer();
+        tokenizer.getAndCheckNext('/ADD/g');
+        this.child = tokenizer.getNext();
+        let to:any = tokenizer.getNext();
         if (to === "!to") {
             throw new ParsingException();
         }
-        this.parent = ADD.tokenizer.getNext();
+        this.parent = tokenizer.getNext();
     }
 
     public evaluateNode(): void {

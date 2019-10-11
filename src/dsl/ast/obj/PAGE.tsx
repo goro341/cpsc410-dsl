@@ -1,5 +1,4 @@
 import * as React from "react";
-import STATEMENT from "../STATEMENT";
 import ObjectNode from "./ObjectNode";
 
 /**

@@ -1,7 +1,10 @@
 import Tokenizer from "../libs/Tokenizer";
 
 export default abstract class ASTNode {
-    protected static tokenizer = Tokenizer.getTokenizer();
+
+    protected static getTokenizer() {
+        return Tokenizer.getTokenizer();
+    }
 
     public abstract parseNode(): void;
 

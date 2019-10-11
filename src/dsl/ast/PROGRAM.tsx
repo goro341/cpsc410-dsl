@@ -3,8 +3,9 @@ import * as React from "react";
 import STATEMENT from "./STATEMENT";
 import ObjectsTable from "../libs/ObjectsTable";
 import PAGE from "./obj/PAGE";
-import Tokenizer from "../libs/Tokenizer";
 import ParsingException from "../exception/ParsingException";
+import CREATE from "./CREATE";
+import ADD from "./ADD";
 
 /**
  * Represents
@@ -19,9 +20,23 @@ export default class PROGRAM extends ASTNode {
         this.statements = [];
     }
 
+    /**
+     * Returns either ADD or CREATE depending on next token
+     */
+    public getNextStatement(): STATEMENT | null {
+        switch (ASTNode.getTokenizer().getNext()) {
+            case "CREATE":
+                return new CREATE();
+            case "ADD":
+                return new ADD();
+            default:
+                return null;
+        }
+    }
+
     public parseNode(): void {
-        while(PROGRAM.tokenizer.hasMore()){
-            const s: STATEMENT|null = STATEMENT.getNextStatment();
+        while(ASTNode.getTokenizer().hasMore()){
+            const s: STATEMENT|null = this.getNextStatement();
             if(s === null) throw new ParsingException();
             s.parseNode();
             this.statements.push(s);

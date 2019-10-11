@@ -1,10 +1,8 @@
-import ASTNode from "./ASTNode";
-import * as React from "react";
 import STATEMENT from "./STATEMENT";
-import Tokenizer from "../libs/Tokenizer";
 import ObjectNode from "./obj/ObjectNode";
 import ObjectTypeNotExistsError from "../exception/ObjectTypeNotExistsError";
 import ObjectsTable from "../libs/ObjectsTable";
+import ASTNode from "./ASTNode";
 
 /**
  * Represents
@@ -24,9 +22,10 @@ export default class CREATE extends STATEMENT {
     }
 
     public parseNode(): void {
-        CREATE.tokenizer.getAndCheckNext('/CREATE/g');
-        this.type = CREATE.tokenizer.getNext();
-        this.name = CREATE.tokenizer.getNext();
+        const tokenizer = ASTNode.getTokenizer();
+        tokenizer.getAndCheckNext('/CREATE/g');
+        this.type = tokenizer.getNext();
+        this.name = tokenizer.getNext();
     }
 
     public evaluateNode(): void {

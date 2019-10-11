@@ -1,5 +1,4 @@
 import ASTNode from "../ASTNode";
-import React from "react";
 import PAGE from "./PAGE";
 
 export default abstract class ObjectNode extends ASTNode{
