@@ -23,7 +23,7 @@ export default class CREATE extends STATEMENT {
 
     public parseNode(): void {
         const tokenizer = ASTNode.getTokenizer();
-        tokenizer.getAndCheckNext('/CREATE/g');
+        tokenizer.getAndCheckNext('CREATE');
         this.type = tokenizer.getNext();
         this.name = tokenizer.getNext();
     }

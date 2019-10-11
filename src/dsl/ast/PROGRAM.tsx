@@ -6,6 +6,8 @@ import PAGE from "./obj/PAGE";
 import ParsingException from "../exception/ParsingException";
 import CREATE from "./CREATE";
 import ADD from "./ADD";
+import POSITION from "./POSITION";
+import BUILD from "./BUILD";
 
 /**
  * Represents
@@ -24,14 +26,20 @@ export default class PROGRAM extends ASTNode {
      * Returns either ADD or CREATE depending on next token
      */
     public getNextStatement(): STATEMENT | null {
-        switch (ASTNode.getTokenizer().getNext()) {
-            case "CREATE":
-                return new CREATE();
-            case "ADD":
-                return new ADD();
-            default:
-                return null;
+        const tokenizer = ASTNode.getTokenizer();
+        if (tokenizer.checkToken("CREATE")) {
+            return new CREATE();
         }
+        if (tokenizer.checkToken("ADD")){
+            return new ADD();
+        }
+        if (tokenizer.checkToken("POSITION")){
+            return new POSITION();
+        }
+        if (tokenizer.checkToken("BUILD")){
+            return new BUILD();
+        }
+        else return null;
     }
 
     public parseNode(): void {

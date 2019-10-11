@@ -19,7 +19,7 @@ export default class ADD extends STATEMENT{
     }
     public parseNode(): void {
         const tokenizer = ASTNode.getTokenizer();
-        tokenizer.getAndCheckNext('/ADD/g');
+        tokenizer.getAndCheckNext('ADD');
         this.child = tokenizer.getNext();
         let to:any = tokenizer.getNext();
         if (to === "!to") {

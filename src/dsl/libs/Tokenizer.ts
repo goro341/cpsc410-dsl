@@ -35,7 +35,7 @@ export default class Tokenizer {
         tokenizedProgram = replaceAll(tokenizedProgram, "__","_");
         console.log(tokenizedProgram);
         const tempArray = tokenizedProgram.split("_");
-        this.tokens = tempArray.slice(1);
+        this.tokens = tempArray.slice(1, -1);
         console.log(this.tokens);
     }
 
