@@ -1,5 +1,4 @@
 import ASTNode from "../ASTNode";
-import PAGE from "./PAGE";
 
 export default abstract class ObjectNode extends ASTNode{
     // object nodes never need parsing
@@ -16,11 +15,12 @@ export default abstract class ObjectNode extends ASTNode{
     public abstract evaluateNode(): JSX.Element;
 
     public static getObjNode(name: string): ObjectNode|null {
-        switch (name) {
-            case 'PAGE':
-                return new PAGE();
-            default:
-                return null;
-        }
+        return null;
+        // switch (name) {
+        //     case 'PAGE':
+        //         return new PAGE();
+        //     default:
+        //         return null;
+        // }
     }
 }
