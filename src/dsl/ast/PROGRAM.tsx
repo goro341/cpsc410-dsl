@@ -16,6 +16,7 @@ import {
     Redirect
 } from "react-router-dom";
 import NoMatch from "../../components/NoMatch";
+import ObjTableViz from "../../components/ObjTableViz";
 
 /**
  * Represents
@@ -68,7 +69,7 @@ export default class PROGRAM extends ASTNode {
         let arr = [];
         while (!result.done) {
             if(result.value[1] instanceof PAGE){
-                arr.push(result.value[1].evaluateNode()); // needs some routing logic around it
+                arr.push(result.value[1].evaluateNode());
             }
             result = it.next();
         }
@@ -79,6 +80,9 @@ export default class PROGRAM extends ASTNode {
             <Switch>
                 <Redirect exact from="/" to="/index" />
                 {arr}
+                <Route exact path="/debug/obj">
+                    <ObjTableViz/>
+                </Route>
                 <Route path="*">
                     <NoMatch />
                 </Route>

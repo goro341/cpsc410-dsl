@@ -1,17 +1,16 @@
 CREATE PAGE index
-CREATE HEADER h1
-ADD "Masoud", "123" to h1
-CREATE HEADER h2
-CREATE HEADER h3
-ADD "Nader" to h3
-ADD "Arash" to h2
-ADD h1, h2, h3 to index
+CREATE TEXT main-Text
+ADD "Hello" to main-Text
+ADD main-Text to index
+
 CREATE PAGE about
-CREATE TEXT aboutt
-ADD "Helloworld!" to aboutt
-ADD aboutt to about
-CREATE LINK aboutl
-ADD about to aboutl
-ADD "A b o ut","page" to aboutl
-ADD aboutl to index
+CREATE HEADER aboutHeader
+ADD aboutHeader to about
+ADD "Hello" to aboutHeader
+
+CREATE LINK link
+ADD "click here" to link
+ADD about to link
+ADD link to index
+
 BUILD

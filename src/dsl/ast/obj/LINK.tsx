@@ -27,6 +27,7 @@ export default class LINK extends ObjectNode{
     public addChild(child: ObjectNode|string): void {
         if(child instanceof PAGE){
             this.target = child.getName();
+            return;
         }
         if(typeof child === "string"){
             this.children.push(child);

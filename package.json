@@ -12,6 +12,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-element-to-jsx-string": "^14.1.0",
+    "react-graph-vis": "^1.0.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.2",
     "typescript": "3.6.3"
