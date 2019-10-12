@@ -18,7 +18,7 @@ export default class HEADER extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<Header name={this.content} key={this.name}/>);
+        return (<Header name={this.content} key={this.getRenderSafeName()}/>);
     }
 
     public addChild(child: ObjectNode|string): void {

@@ -18,7 +18,7 @@ export default class PAGE extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<Route exact key={this.name} path={"/" + this.name}>{this.children.map(c => c.evaluateNode())}</Route>);
+        return (<Route exact key={this.getRenderSafeName()} path={"/" + this.name}>{this.children.map(c => c.evaluateNode())}</Route>);
     }
 
     public addChild(child: ObjectNode|string): void {

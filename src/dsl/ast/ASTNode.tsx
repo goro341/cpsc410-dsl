@@ -2,6 +2,7 @@ import Tokenizer from "../libs/Tokenizer";
 
 export default abstract class ASTNode {
 
+
     protected static getTokenizer() {
         return Tokenizer.getTokenizer();
     }

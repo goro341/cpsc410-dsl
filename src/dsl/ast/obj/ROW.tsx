@@ -13,8 +13,8 @@ export default class ROW extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<tr key={this.name}>
-            {this.children.map(c => typeof c === "string" ? <td>{c}</td> : <td>{c.evaluateNode()}</td>)}
+        return (<tr key={this.getRenderSafeName()}>
+            {this.children.map((c, idx) => <td key={this.getRenderSafeName() + idx.toString()}>{typeof c === "string" ? c : c.evaluateNode()}</td>)}
         </tr>);
     }
 

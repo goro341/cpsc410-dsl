@@ -4,6 +4,7 @@ import ASTNode from "./ASTNode";
 import ObjectsTable from "../libs/ObjectsTable";
 import ObjectNotExistsError from "../exception/ObjectNotExistsError";
 import ObjectNode from "./obj/ObjectNode";
+import ADDLIT from "./ADDLIT";
 
 /**
  * Represents
@@ -12,7 +13,7 @@ import ObjectNode from "./obj/ObjectNode";
  * Will lookup x x2 x3 in the symbols table and add them to y
  */
 export default class ADD extends STATEMENT {
-    private children: string[];
+    private children: ADDLIT[];
     private parent: string;
 
     constructor() {
@@ -24,14 +25,16 @@ export default class ADD extends STATEMENT {
     public parseNode(): void {
         const tokenizer = ASTNode.getTokenizer();
         tokenizer.getAndCheckNext('ADD');
-        let next;
-        while((next = tokenizer.getNext()) !== "to"){
-            if(next === "ADD" || next === "CREATE"){ // grace failure
+        while(!tokenizer.checkToken('to')){
+            if(tokenizer.checkToken('ADD') || tokenizer.checkToken('CREATE')){ // grace failure
                 throw new ParsingException();
             }
-            this.children.push(next);
+            const addlit: ADDLIT = new ADDLIT();
+            addlit.parseNode();
+            this.children.push(addlit);
             if(tokenizer.checkToken("\,")) tokenizer.getNext();
         }
+        tokenizer.getNext(); // to
         this.parent = tokenizer.getNext();
     }
 
@@ -41,19 +44,8 @@ export default class ADD extends STATEMENT {
             throw new ObjectNotExistsError();
         }
         // TODO: do more type checking here
-        this.children.forEach((child: string) => {
-            console.log(child);
-            let childObj: string|ObjectNode;
-            if (child.includes("'") || child.includes("\"")) {
-                childObj = child.replace(/\'/g, "").replace(/"/g, "");
-            } else {
-                let c: ObjectNode|undefined = ObjectsTable.getObject(child);
-                if (!c) {
-                    throw new ObjectNotExistsError();
-                }
-                childObj = c;
-            }
-            parentObject.addChild(childObj);
+        this.children.forEach((child: ADDLIT) => {
+            parentObject.addChild(child.evaluateNode());
         });
 
         return;

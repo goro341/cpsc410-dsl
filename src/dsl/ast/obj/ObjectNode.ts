@@ -3,6 +3,8 @@ import ASTNode from "../ASTNode";
 export default abstract class ObjectNode extends ASTNode{
     protected name: string;
 
+    private renderId: number = 11;
+
 
     constructor(name: string) {
         super();
@@ -25,5 +27,9 @@ export default abstract class ObjectNode extends ASTNode{
 
     public getName(): string {
         return this.name;
+    }
+
+    protected getRenderSafeName(): string{
+        return this.name + (this.renderId++).toString();
     }
 }

@@ -17,7 +17,7 @@ export default class TEXT extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<p key={this.name}>{this.content}</p>);
+        return (<p key={this.getRenderSafeName()}>{this.content}</p>);
     }
 
     public addChild(child: ObjectNode|string): void {
