@@ -4,7 +4,7 @@ import ASTNode from "./ASTNode";
 import ObjectsTable from "../libs/ObjectsTable";
 import ObjectNotExistsError from "../exception/ObjectNotExistsError";
 import ObjectNode from "./obj/ObjectNode";
-import ADDLIT from "./ADDLIT";
+import ADDLIT from "./ADD_LIT";
 
 /**
  * Represents

@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import NoMatch from "../../components/NoMatch";
 import ObjTableViz from "../../components/ObjTableViz";
+import ASTViz from "../../components/ASTViz";
 
 /**
  * Represents
@@ -73,6 +74,7 @@ export default class PROGRAM extends ASTNode {
             }
             result = it.next();
         }
+
         // this method is tricky because the PROGRAM should basically eval all sub components
         // then return the composition of all PAGE items in the symbols table, with some React code to seperate pages
         // but for now I guess just compose all pages
@@ -82,6 +84,9 @@ export default class PROGRAM extends ASTNode {
                 {arr}
                 <Route exact path="/debug/obj">
                     <ObjTableViz/>
+                </Route>
+                <Route exact path="/debug/ast">
+                    <ASTViz/>
                 </Route>
                 <Route path="*">
                     <NoMatch />

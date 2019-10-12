@@ -4,7 +4,6 @@ import user_input from '../user-input.txt';
 import {replaceAll} from "./Utils";
 
 export default class Tokenizer {
-
     private static program: string;
     private tokens: string[] = [];
 
@@ -90,6 +89,11 @@ export default class Tokenizer {
         if (!this.theTokenizer) {
             this.theTokenizer = new Tokenizer(program, literals);
         }
+    }
+
+    public reset(){
+        this.currentToken = 0;
+        this.tokenize();
     }
 
     public static getTokenizer(): Tokenizer {
