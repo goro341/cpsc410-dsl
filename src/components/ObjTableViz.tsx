@@ -16,7 +16,7 @@ export default function ObjTableViz() {
         if(result.value[1] instanceof ObjectNode){
             nodes.push({
                 id: result.value[1].getName(),
-                label: result.value[1].getName()
+                label: result.value[1].constructor.name + "\n" + result.value[1].getName()
             });
             // @ts-ignore
             if(result.value[1]['children'] !== undefined) {
@@ -47,7 +47,7 @@ export default function ObjTableViz() {
         edges: {
             color: "#000000"
         },
-        height: "500px"
+        height: "700px"
     };
 
     return (
