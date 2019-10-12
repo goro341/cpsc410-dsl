@@ -13,4 +13,11 @@ ADD "click here" to link
 ADD about to link
 ADD link to index
 
+CREATE TABLE stuff
+CREATE ROW r1
+ADD r1 to stuff
+ADD r1 to stuff
+ADD "one", "two", "three" to r1
+ADD stuff to index
+
 BUILD
