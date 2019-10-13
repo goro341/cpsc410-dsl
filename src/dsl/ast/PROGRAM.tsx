@@ -18,6 +18,7 @@ import {
 import NoMatch from "../../components/NoMatch";
 import ObjTableViz from "../../components/ObjTableViz";
 import ASTViz from "../../components/ASTViz";
+import LOAD from "./LOAD";
 
 /**
  * Represents
@@ -45,6 +46,9 @@ export default class PROGRAM extends ASTNode {
         }
         if (tokenizer.checkToken("POSITION")){
             return new POSITION();
+        }
+        if (tokenizer.checkToken("LOAD")){
+            return new LOAD();
         }
         if (tokenizer.checkToken("BUILD")){
             return new BUILD();

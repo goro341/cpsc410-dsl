@@ -7,34 +7,34 @@ import ASTNode from "./ASTNode";
 import Header from "../../components/Header";
 import ObjNodeFactory from "./obj/ObjNodeFactory";
 import VariableNameAlreadyExists from "../exception/VariableNameAlreadyExists";
+import CREATE from "./CREATE";
 
 /**
  * Represents
- * CREATE (...) t
+ * LOAD (...) t
  *
- * Will register t in the symbols table with the content being the comp/page that has been defined
  */
-export default class CREATE extends STATEMENT {
-    protected type: string;
-    protected name: string;
+export default class LOAD extends ASTNode{
+    private name: string;
+    private thingToLoad: string;
+
 
     constructor() {
         super();
-        this.type = "";
         this.name = "";
+        this.thingToLoad = "";
     }
 
     public parseNode(): void {
         const tokenizer = ASTNode.getTokenizer();
-        tokenizer.getAndCheckNext('CREATE');
-        this.type = tokenizer.getNext();
+        tokenizer.getAndCheckNext('LOAD');
+        this.thingToLoad = tokenizer.getNext();
+        tokenizer.getAndCheckNext('with');
         this.name = tokenizer.getNext();
     }
 
     public evaluateNode(): void {
-        const node: ObjectNode|null = ObjNodeFactory.getObjNode(this.type, this.name);
-        if(node === null) throw new ObjectTypeNotExistsError();
-        if(ObjectsTable.hasObject(this.name)) throw new VariableNameAlreadyExists();
-        ObjectsTable.putObject(this.name, node);
+        // to evaluate this node we need to some super fancy stuff
+        // right now I will just ignore it
     }
 }
