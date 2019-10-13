@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
 import './Header.css';
+import {AppBar, Toolbar, Typography} from "@material-ui/core";
 
 interface IHeaderComponentProps {
     name: string;
@@ -38,9 +39,13 @@ export class Header extends React.Component<IHeaderComponentProps, IHeaderCompon
 
     public render(): JSX.Element {
         return (
-            <header className="App-header">
-                    {this.state.text}
-            </header>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6">
+                        {this.state.text}
+                    </Typography>
+                </Toolbar>
+            </AppBar>
         );
     }
 

@@ -4,10 +4,11 @@ import TypeMismatchError from "../../exception/TypeMismatchError";
 import PAGE from "./PAGE";
 import {Link} from "react-router-dom";
 import ROW from "./ROW";
-import {Paper, Table, TableBody} from "@material-ui/core";
+import {Grid, Paper, Table, TableBody} from "@material-ui/core";
+import GRIDIT from "./GRIDIT";
 
-export default class TABLE extends ObjectNode{
-    private children: ROW[];
+export default class GRID extends ObjectNode{
+    private children: GRIDIT[];
 
     constructor(name: string) {
         super(name);
@@ -15,11 +16,11 @@ export default class TABLE extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<Paper><Table key={this.getRenderSafeName()}><TableBody>{this.children.map(c => c.evaluateNode())}</TableBody></Table></Paper>);
+        return (<Grid container key={this.getRenderSafeName()}>{this.children.map(c => c.evaluateNode())}</Grid>)
     }
 
     public addChild(child: ObjectNode|string): void {
-        if(child instanceof ROW){
+        if(child instanceof GRIDIT){
             this.children.push(child);
         }
         else{

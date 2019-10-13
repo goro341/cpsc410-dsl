@@ -9,7 +9,7 @@ import DSLException from "./dsl/exception/DSLException";
     console.log("this is the main function");
 
     const literals = ["CREATE", "ADD", "PAGE", "COMPONENT", "PHOTO", "TABLE", "ROW",
-        "to", "POSITION", "CENTER", "BUILD", "HEADER", ",", "TEXT", "LINK"];
+        "to", "POSITION", "CENTER", "BUILD", "HEADER", ",", "TEXT", "LINK", "GRID", "SM BLOCK", "MD BLOCK ", "LG BLOCK"];
     try {
         await Tokenizer.makeTokenizer(literals);
         const program = new PROGRAM();

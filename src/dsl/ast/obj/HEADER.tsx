@@ -8,8 +8,9 @@ import TypeMismatchError from "../../exception/TypeMismatchError";
 import PAGE from "./PAGE";
 import {type} from "os";
 import Header from "../../../components/Header";
+import FLUIDELEMENT from "./FLUIDELEMENT";
 
-export default class HEADER extends ObjectNode{
+export default class HEADER extends FLUIDELEMENT{
     private content: string;
 
     constructor(name: string) {

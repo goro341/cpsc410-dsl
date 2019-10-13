@@ -20,4 +20,17 @@ ADD r1 to stuff
 ADD "one", "two", "three" to r1
 ADD stuff to index
 
+ADD aboutHeader to index
+
+CREATE PAGE gridPage
+CREATE GRID grid
+CREATE MD BLOCK block
+ADD "hello" to block
+ADD block to grid
+ADD grid to gridPage
+CREATE SM BLOCK small
+ADD "world" to small
+ADD small to grid
+
+
 BUILD
