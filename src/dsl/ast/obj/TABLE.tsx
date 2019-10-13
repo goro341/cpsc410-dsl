@@ -15,7 +15,11 @@ export default class TABLE extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<Paper><Table key={this.getRenderSafeName()}><TableBody>{this.children.map(c => c.evaluateNode())}</TableBody></Table></Paper>);
+        return (<Paper key={this.getRenderSafeName()}>
+            <Table>
+                <TableBody>{this.children.map(c => c.evaluateNode())}</TableBody>
+            </Table>
+        </Paper>);
     }
 
     public addChild(child: ObjectNode|string): void {

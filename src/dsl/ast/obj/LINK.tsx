@@ -21,7 +21,7 @@ export default class LINK extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<p key={this.getRenderSafeName()} ><Link to={"/" + this.target}>{this.children.map(c => typeof c === "string" ? c : c.evaluateNode())}</Link></p>);
+        return (<Link to={"/" + this.target} key={this.getRenderSafeName()} >{this.children.map(c => typeof c === "string" ? c : c.evaluateNode())}</Link>);
     }
 
     public addChild(child: ObjectNode|string): void {

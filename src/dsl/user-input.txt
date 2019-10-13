@@ -3,6 +3,10 @@ CREATE TEXT main-Text
 ADD "Hello" to main-Text
 ADD main-Text to index
 
+CREATE PHOTO gregor
+ADD "http://api.gregor.fun/image" to gregor
+ADD gregor to index
+
 CREATE PAGE about
 CREATE HEADER aboutHeader
 ADD aboutHeader to about

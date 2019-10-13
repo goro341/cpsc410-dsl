@@ -10,6 +10,7 @@ import GRID from "./GRID";
 import SMBLOCK from "./SMBLOCK";
 import MDBLOCK from "./MDBLOCK";
 import LGBLOCK from "./LGBLOCK";
+import PHOTO from "./PHOTO";
 
 export default abstract class ObjNodeFactory{
     public static getObjNode(type: string, name: string): ObjectNode|null {
@@ -34,6 +35,8 @@ export default abstract class ObjNodeFactory{
                 return new MDBLOCK(name);
             case 'LGBLOCK':
                 return new LGBLOCK(name);
+            case 'PHOTO':
+                return new PHOTO(name);
             default:
                 return null;
         }
