@@ -17,8 +17,8 @@ export default class ADD_LIT extends STATEMENT {
     }
 
     public evaluateNode(): ObjectNode|string {
-        if (this.item.includes("'") || this.item.includes("\"")) {
-            return this.item.replace(/\'/g, "").replace(/"/g, "");
+        if (this.item.startsWith("\"") && this.item.endsWith("\"")) {
+            return this.item.replace(/"/g, "");
         } else {
             let c: ObjectNode|undefined = ObjectsTable.getObject(this.item);
             if (!c) {
