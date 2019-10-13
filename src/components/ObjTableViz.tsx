@@ -16,7 +16,8 @@ export default function ObjTableViz() {
         if(result.value[1] instanceof ObjectNode){
             nodes.push({
                 id: result.value[1].getName(),
-                label: result.value[1].constructor.name + "\n" + result.value[1].getName()
+                label: result.value[1].constructor.name + "\n" + result.value[1].getName(),
+                color: result.value[1] instanceof PAGE ? "#ffa4a2" : "#c7a4ff"
             });
             // @ts-ignore
             if(result.value[1]['children'] !== undefined) {
@@ -26,6 +27,17 @@ export default function ObjTableViz() {
                     if(child instanceof ObjectNode){
                         edges.push({
                             to: child.getName(),
+                            from: result.value[1].getName()
+                        });
+                    }
+                    else{
+                        nodes.push({
+                            id: result.value[1].getName() + "__" + child,
+                            label: "\"" + child + "\"",
+                            color: "#fff"
+                        });
+                        edges.push({
+                            to: result.value[1].getName() + "__" + child,
                             from: result.value[1].getName()
                         });
                     }
