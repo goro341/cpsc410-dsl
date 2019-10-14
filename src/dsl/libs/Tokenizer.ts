@@ -1,13 +1,16 @@
 // I think tokenizer will be all static for ease of use
 
 import {replaceAll} from "./Utils";
+import ObjectNode from "../ast/obj/ObjectNode";
 
 export default class Tokenizer {
     private static program: string;
     private tokens: string[] = [];
 
     private currentToken: number;
-    private static theTokenizer: Tokenizer;
+    private static theTokenizer: Tokenizer|undefined;
+
+    private static pastStates: Tokenizer[] = [];
 
 
     private constructor(program: string, private literals: string[]) {
@@ -39,6 +42,18 @@ export default class Tokenizer {
         const tempArray = tokenizedProgram.split("_");
         this.tokens = tempArray.slice(1, -1);
         // console.log(this.tokens);
+    }
+
+    public static saveState(){
+        if(this.theTokenizer) {
+            this.pastStates.push(this.theTokenizer);
+            this.theTokenizer = undefined;
+        }
+    }
+
+    public static popState(){
+        if(this.pastStates.length > 0)
+            this.theTokenizer = this.pastStates.shift();
     }
 
     public getNext(): string {
@@ -83,8 +98,8 @@ export default class Tokenizer {
         return this.currentToken < this.tokens.length;
     }
 
-    public static async makeTokenizer(literals: string[]) {
-        const program = await (await fetch("/user-input.web")).text();
+    public static async makeTokenizer(literals: string[], file: string) {
+        const program = await (await fetch(file)).text();
         if (!this.theTokenizer) {
             this.theTokenizer = new Tokenizer(program, literals);
         }
@@ -96,6 +111,6 @@ export default class Tokenizer {
     }
 
     public static getTokenizer(): Tokenizer {
-        return this.theTokenizer;
+        return this.theTokenizer as Tokenizer;
     }
 }

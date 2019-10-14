@@ -13,6 +13,9 @@ import TypeMismatchError from "../exception/TypeMismatchError";
 import TEXT from "./obj/TEXT";
 import HTML from "./obj/HTML";
 import MD from "./obj/MD";
+import LoadContentNotRecognizedError from "../exception/LoadContentNotRecognizedError";
+import Tokenizer from "../libs/Tokenizer";
+import PROGRAM from "./PROGRAM";
 
 /**
  * Represents
@@ -59,7 +62,24 @@ export default class LOAD extends ASTNode{
             ObjectsTable.putObject(this.name, md);
         }
         else if(item.endsWith("web")){
+            Tokenizer.saveState();
+            ObjectsTable.saveState();
+            const literals = ["CREATE", "ADD", "PAGE", "COMPONENT", "PHOTO", "TABLE", "ROW",
+                "to", "POSITION", "CENTER", "BUILD", "HEADER", ",", "TEXT", "LINK", "GRID", "SM BLOCK", "MD BLOCK ", "LG BLOCK", "LOAD", "with"];
+            await Tokenizer.makeTokenizer(literals, item);
+            const program = new PROGRAM();
+            program.parseNode();
+            await program.evaluateNode();
+            if(!ObjectsTable.hasObject(this.name)) throw new ObjectTypeNotExistsError();
+            const obj: ObjectNode = ObjectsTable.getObject(this.name) as ObjectNode;
+            // @ts-ignore
+            obj['___loaded'] = true;
 
+            ObjectsTable.popState();
+            Tokenizer.popState();
+            ObjectsTable.putObject(this.name, obj);
+        } else {
+            throw new LoadContentNotRecognizedError();
         }
     }
 }

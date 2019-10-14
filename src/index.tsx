@@ -11,7 +11,7 @@ import DSLException from "./dsl/exception/DSLException";
     const literals = ["CREATE", "ADD", "PAGE", "COMPONENT", "PHOTO", "TABLE", "ROW",
         "to", "POSITION", "CENTER", "BUILD", "HEADER", ",", "TEXT", "LINK", "GRID", "SM BLOCK", "MD BLOCK ", "LG BLOCK", "LOAD", "with"];
     try {
-        await Tokenizer.makeTokenizer(literals);
+        await Tokenizer.makeTokenizer(literals,"/user-input.web");
         const program = new PROGRAM();
         program.parseNode();
         const root: JSX.Element = await program.evaluateNode();

@@ -8,8 +8,7 @@ CREATE MD BLOCK one
 ADD "hello" to one
 ADD one to g
 
-LOAD "/test.md" with robots
-ADD robots to 1
+LOAD "/test.web" with test
 
 CREATE MD BLOCK two
 ADD "hello world" to two

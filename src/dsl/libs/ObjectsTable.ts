@@ -4,9 +4,18 @@ import CREATE from "../ast/CREATE";
 
 export default class ObjectsTable {
     private static data: Map<string, ObjectNode> = new Map<string, ObjectNode>();
-    public static creates: Map<string, CREATE> = new Map<string, CREATE>();
 
+    private static pastStates: Map<string, ObjectNode>[] = [];
 
+    public static saveState(){
+        this.pastStates.push(this.data);
+        this.data = new Map<string, ObjectNode>();
+    }
+
+    public static popState(){
+        if(this.pastStates.length > 0)
+            this.data = this.pastStates.shift() as Map<string, ObjectNode>;
+    }
 
     public static putObject(name: string, object: ObjectNode) {
         this.data.set(name, object);

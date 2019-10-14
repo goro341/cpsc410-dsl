@@ -1,4 +1,5 @@
 import ASTNode from "../ASTNode";
+import ObjectsTable from "../../libs/ObjectsTable";
 
 export default abstract class ObjectNode extends ASTNode{
     protected name: string;

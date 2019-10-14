@@ -1,0 +1,5 @@
+CREATE PAGE test
+CREATE TEXT hey
+ADD hey to test
+ADD "HELLO WORLD!" to hey
+BUILD

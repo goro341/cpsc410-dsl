@@ -17,7 +17,9 @@ export default function ObjTableViz() {
             nodes.push({
                 id: result.value[1].getName(),
                 label: result.value[1].constructor.name + "\n" + result.value[1].getName(),
-                color: result.value[1] instanceof PAGE ? "#ffa4a2" : "#c7a4ff"
+                color: result.value[1] instanceof PAGE ? "#ffa4a2" : "#c7a4ff",
+                // @ts-ignore
+                shape: result.value[1]['___loaded'] ? "star" : undefined
             });
             // @ts-ignore
             if(result.value[1]['children'] !== undefined) {
