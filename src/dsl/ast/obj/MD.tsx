@@ -7,8 +7,9 @@ import TypeMismatchError from "../../exception/TypeMismatchError";
 import PAGE from "./PAGE";
 import {type} from "os";
 import Header from "../../../components/Header";
+import ReactMarkdown from "react-markdown";
 
-export default class TEXT extends ObjectNode{
+export default class MD extends ObjectNode{
     private content: string;
 
     constructor(name: string) {
@@ -17,7 +18,7 @@ export default class TEXT extends ObjectNode{
     }
 
     public evaluateNode(): JSX.Element {
-        return (<p style={{whiteSpace: "pre-line"}} key={this.getRenderSafeName()}>{this.content}</p>);
+        return (<ReactMarkdown key={this.getRenderSafeName()} source={this.content}/>);
     }
 
     public addChild(child: ObjectNode|string): void {

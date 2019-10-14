@@ -22,7 +22,7 @@ export default class ADD_LIT extends STATEMENT {
         } else {
             let c: ObjectNode|undefined = ObjectsTable.getObject(this.item);
             if (!c) {
-                throw new ObjectNotExistsError();
+                return Promise.reject(new ObjectNotExistsError());
             }
             return Promise.resolve(c);
         }

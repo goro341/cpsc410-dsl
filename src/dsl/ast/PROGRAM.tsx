@@ -67,14 +67,15 @@ export default class PROGRAM extends ASTNode {
     }
 
     public async evaluateNode(): Promise<JSX.Element> {
-        let p: Promise<any>[] = [];
-        this.statements.forEach(s => {
-            let r = s.evaluateNode();
-            if(r instanceof Promise){
-                p.push(r);
+        let readStatments = async () => {
+            for(const statment of this.statements) {
+                let r = statment.evaluateNode();
+                if(r instanceof Promise){
+                    await r;
+                }
             }
-        });
-        await Promise.all(p);
+        };
+        await readStatments();
         let it = ObjectsTable.getAllObjects();
         let result = it.next();
         let arr = [];

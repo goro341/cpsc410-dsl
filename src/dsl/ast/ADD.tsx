@@ -44,11 +44,9 @@ export default class ADD extends STATEMENT {
             throw new ObjectNotExistsError();
         }
         // TODO: do more type checking here
-        let p: Promise<ObjectNode|string>[] = [];
-        this.children.forEach(async (child: ADDLIT) => {
-            let n = child.evaluateNode();
-            p.push(n);
-            parentObject.addChild(await n);
+        let p: Promise<unknown>[] = [];
+        this.children.forEach((child: ADDLIT) => {
+            p.push(child.evaluateNode().then(obj => parentObject.addChild(obj)));
         });
 
         return Promise.all(p).then();

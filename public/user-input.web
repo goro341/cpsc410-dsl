@@ -8,6 +8,9 @@ CREATE MD BLOCK one
 ADD "hello" to one
 ADD one to g
 
+LOAD "/test.md" with robots
+ADD robots to 1
+
 CREATE MD BLOCK two
 ADD "hello world" to two
 ADD two to g
