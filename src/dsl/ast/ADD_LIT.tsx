@@ -16,15 +16,15 @@ export default class ADD_LIT extends STATEMENT {
         this.item = ADD_LIT.getTokenizer().getNext();
     }
 
-    public evaluateNode(): ObjectNode|string {
+    public evaluateNode(): Promise<ObjectNode|string> {
         if (this.item.startsWith("\"") && this.item.endsWith("\"")) {
-            return this.item.replace(/"/g, "");
+            return Promise.resolve(this.item.replace(/"/g, ""));
         } else {
             let c: ObjectNode|undefined = ObjectsTable.getObject(this.item);
             if (!c) {
                 throw new ObjectNotExistsError();
             }
-            return c;
+            return Promise.resolve(c);
         }
     }
 }

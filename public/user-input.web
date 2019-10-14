@@ -1,0 +1,14 @@
+CREATE PAGE 1
+CREATE HEADER h
+ADD "ldsflk" to h
+ADD h to 1
+CREATE GRID g
+ADD g to 1
+CREATE MD BLOCK one
+ADD "hello" to one
+ADD one to g
+
+CREATE MD BLOCK two
+ADD "hello world" to two
+ADD two to g
+BUILD

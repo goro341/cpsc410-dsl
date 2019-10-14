@@ -38,16 +38,19 @@ export default class ADD extends STATEMENT {
         this.parent = tokenizer.getNext();
     }
 
-    public evaluateNode(): void {
+    public evaluateNode(): Promise<void> {
         const parentObject: ObjectNode|undefined = ObjectsTable.getObject(this.parent);
         if (!parentObject) {
             throw new ObjectNotExistsError();
         }
         // TODO: do more type checking here
-        this.children.forEach((child: ADDLIT) => {
-            parentObject.addChild(child.evaluateNode());
+        let p: Promise<ObjectNode|string>[] = [];
+        this.children.forEach(async (child: ADDLIT) => {
+            let n = child.evaluateNode();
+            p.push(n);
+            parentObject.addChild(await n);
         });
 
-        return;
+        return Promise.all(p).then();
     }
 }

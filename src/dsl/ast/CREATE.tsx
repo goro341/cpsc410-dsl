@@ -31,10 +31,11 @@ export default class CREATE extends STATEMENT {
         this.name = tokenizer.getNext();
     }
 
-    public evaluateNode(): void {
+    public evaluateNode(): Promise<void> {
         const node: ObjectNode|null = ObjNodeFactory.getObjNode(this.type, this.name);
         if(node === null) throw new ObjectTypeNotExistsError();
         if(ObjectsTable.hasObject(this.name)) throw new VariableNameAlreadyExists();
         ObjectsTable.putObject(this.name, node);
+        return Promise.resolve();
     }
 }

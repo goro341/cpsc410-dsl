@@ -9,7 +9,7 @@ export default class BUILD extends STATEMENT{
         BUILD.getTokenizer().getAndCheckNext('BUILD');
     }
 
-    public evaluateNode(): void {
-        return;
+    public evaluateNode(): Promise<void> {
+        return Promise.resolve();
     }
 }

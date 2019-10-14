@@ -1,6 +1,5 @@
 // I think tokenizer will be all static for ease of use
 
-import user_input from '../user-input.txt';
 import {replaceAll} from "./Utils";
 
 export default class Tokenizer {
@@ -85,7 +84,7 @@ export default class Tokenizer {
     }
 
     public static async makeTokenizer(literals: string[]) {
-        const program = await (await fetch(user_input)).text();
+        const program = await (await fetch("/user-input.web")).text();
         if (!this.theTokenizer) {
             this.theTokenizer = new Tokenizer(program, literals);
         }

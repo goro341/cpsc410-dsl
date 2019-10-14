@@ -23,7 +23,7 @@ export default class POSITION extends STATEMENT {
         this.place = tokenizer.getNext();
     }
 
-    public evaluateNode(): void {
-        return;
+    public evaluateNode(): Promise<void> {
+        return Promise.resolve();
     }
 }

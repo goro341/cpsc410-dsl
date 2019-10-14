@@ -66,9 +66,15 @@ export default class PROGRAM extends ASTNode {
         }
     }
 
-    public evaluateNode(): JSX.Element {
-        this.statements.forEach(s => s.evaluateNode()); // runs first stage eval which generates tree
-
+    public async evaluateNode(): Promise<JSX.Element> {
+        let p: Promise<any>[] = [];
+        this.statements.forEach(s => {
+            let r = s.evaluateNode();
+            if(r instanceof Promise){
+                p.push(r);
+            }
+        });
+        await Promise.all(p);
         let it = ObjectsTable.getAllObjects();
         let result = it.next();
         let arr = [];
@@ -82,7 +88,7 @@ export default class PROGRAM extends ASTNode {
         // this method is tricky because the PROGRAM should basically eval all sub components
         // then return the composition of all PAGE items in the symbols table, with some React code to seperate pages
         // but for now I guess just compose all pages
-        return (<Router>
+        return <Router>
             <Switch>
                 <Redirect exact from="/" to="/index" />
                 {arr}
@@ -96,6 +102,6 @@ export default class PROGRAM extends ASTNode {
                     <NoMatch />
                 </Route>
             </Switch>
-        </Router>);
+        </Router>;
     }
 }

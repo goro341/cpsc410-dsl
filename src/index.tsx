@@ -14,7 +14,7 @@ import DSLException from "./dsl/exception/DSLException";
         await Tokenizer.makeTokenizer(literals);
         const program = new PROGRAM();
         program.parseNode();
-        const root: JSX.Element = program.evaluateNode();
+        const root: JSX.Element = await program.evaluateNode();
 
         ReactDOM.render(root, document.getElementById('root'));
     }

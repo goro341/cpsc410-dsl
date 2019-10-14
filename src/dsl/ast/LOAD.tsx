@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import ObjNodeFactory from "./obj/ObjNodeFactory";
 import VariableNameAlreadyExists from "../exception/VariableNameAlreadyExists";
 import CREATE from "./CREATE";
+import ADD_LIT from "./ADD_LIT";
 
 /**
  * Represents
@@ -16,25 +17,27 @@ import CREATE from "./CREATE";
  */
 export default class LOAD extends ASTNode{
     private name: string;
-    private thingToLoad: string;
+    private thingToLoad: ADD_LIT;
 
 
     constructor() {
         super();
         this.name = "";
-        this.thingToLoad = "";
+        this.thingToLoad = new ADD_LIT();
     }
 
     public parseNode(): void {
         const tokenizer = ASTNode.getTokenizer();
         tokenizer.getAndCheckNext('LOAD');
-        this.thingToLoad = tokenizer.getNext();
+        this.thingToLoad.parseNode();
         tokenizer.getAndCheckNext('with');
         this.name = tokenizer.getNext();
     }
 
-    public evaluateNode(): void {
+    public evaluateNode(): Promise<void> {
         // to evaluate this node we need to some super fancy stuff
         // right now I will just ignore it
+        return Promise.resolve();
+
     }
 }
