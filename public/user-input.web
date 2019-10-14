@@ -22,7 +22,7 @@ CREATE MD BLOCK one5
 ADD "Noa" to one5
 ADD one5 to g
 CREATE MD BLOCK two
-ADD "Hayl" to two
+ADD "Heyl" to two
 ADD two to g
 CREATE MD BLOCK two2
 ADD "Nader" to two2
@@ -46,7 +46,7 @@ CREATE MD BLOCK team
 ADD "makes MANN"," + " ,"Bryan" to team
 POSITION team to CENTER
 ADD team to g
-CREATE PICTURE mann
+CREATE PHOTO mann
 ADD "/mann.png" to mann
 ADD mann to index
 BUILD
