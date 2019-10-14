@@ -1,16 +1,53 @@
-CREATE PAGE 1
-CREATE HEADER h
-ADD "ldsflk" to h
-ADD h to 1
-CREATE GRID g
-ADD g to 1
-CREATE MD BLOCK one
-ADD "hello" to one
-ADD one to g
-
 LOAD "/test.web" with test
 
+CREATE PAGE index
+CREATE HEADER h
+ADD "Team MANN" to h
+ADD h to index
+CREATE GRID g
+ADD g to index
+CREATE MD BLOCK one
+ADD "Masoud" to one
+ADD one to g
+CREATE MD BLOCK one2
+ADD "Javeri" to one2
+ADD one2 to g
+CREATE MD BLOCK one3
+ADD "Arash" to one3
+ADD one3 to g
+CREATE MD BLOCK one4
+ADD "Haj" to one4
+ADD one4 to g
+CREATE MD BLOCK one5
+ADD "Noa" to one5
+ADD one5 to g
 CREATE MD BLOCK two
-ADD "hello world" to two
+ADD "Hayl" to two
 ADD two to g
+CREATE MD BLOCK two2
+ADD "Nader" to two2
+ADD two2 to g
+CREATE MD BLOCK two3
+ADD "Samadyan" to two3
+ADD two3 to g
+CREATE MD BLOCK two4
+ADD "Bryan" to two4
+ADD two4 to g
+CREATE MD BLOCK two5
+ADD "Choi" to two5
+ADD two5 to g
+CREATE MD BLOCK empty
+ADD " " to empty
+ADD empty to g
+CREATE MD BLOCK empty2
+ADD " " to empty2
+ADD empty2 to g
+CREATE MD BLOCK team
+ADD "makes MANN"," + " ,"Bryan" to team
+POSITION team to CENTER
+ADD team to g
+CREATE PICTURE mann
+ADD "/mann.png" to mann
+ADD mann to index
 BUILD
+
